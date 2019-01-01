@@ -1,5 +1,7 @@
 package com.app.chess.GUI;
 
+import com.app.chess.Core.ChessBoard.ChessBoardGraphics;
+
 import javax.swing.*;
 import java.awt.*;
 import java.net.Socket;
@@ -7,8 +9,8 @@ import java.net.Socket;
 //Person information GUI
 public class PIGUI extends JFrame {
 
-    private static short WIDTH = 300;
-    private static short HEIGHT = 500;
+    private static final short WIDTH = 300;
+    private static final short HEIGHT = 500;
 
     public PIGUI(){
         setupWindow();
@@ -87,8 +89,8 @@ public class PIGUI extends JFrame {
 //            }
 
             dispose();
-            ChessGUI chessGUI = new ChessGUI(socket);
-            chessGUI.start();
+            ChessBoardGraphics chess = new ChessBoardGraphics();
+            chess.start();
         });
     }
 

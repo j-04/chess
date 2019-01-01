@@ -1,6 +1,6 @@
 package com.app.chess.Figures.WhitePieces;
 
-import com.app.chess.Data.Data;
+import com.app.chess.Core.ChessBoard.ChessBoardLogic;
 import com.app.chess.Figures.AbstractPieces.Pawn;
 import com.app.chess.Figures.Figure;
 
@@ -24,13 +24,11 @@ public class WhitePawn extends Pawn {
         }
 
         add(label);
-
         predictSteps();
     }
 
     @Override
     public void predictSteps() {
-
         //Очистка массива с предиктами ходов
         for (int i = 0; i < steps.length; i++) {
             for (int k = 0; k < steps.length; k++) {
@@ -44,15 +42,14 @@ public class WhitePawn extends Pawn {
         }
 
         //Ход на одну клетку вперед
-        if ( this.getPositionInArrayY() != 0 && (Data.figuresArray[this.getPositionInArrayY() - 1][this.getPositionInArrayX()] == null)) {
+        if ( this.getPositionInArrayY() != 0 && (ChessBoardLogic.figuresArray[this.getPositionInArrayY() - 1][this.getPositionInArrayX()] == null)) {
             steps[this.getPositionInArrayY() - 1][this.getPositionInArrayX()] = true;
         }
 
         Figure figure = null;
-
         //Уничтожение вражеской фигуры слева по диагонали от пешки
         if (this.getPositionInArrayX() != 0 && this.getPositionInArrayY() != 0)
-            figure = Data.figuresArray[this.getPositionInArrayY() - 1][this.getPositionInArrayX() - 1];
+            figure = ChessBoardLogic.figuresArray[this.getPositionInArrayY() - 1][this.getPositionInArrayX() - 1];
 
         if (this.getPositionInArrayY() != 0 && (figure != null && !figure.getColor().equals(this.getColor()) && this.getPositionInArrayX() != 0)) {
             steps[this.getPositionInArrayY() - 1][this.getPositionInArrayX() - 1] = true;
@@ -60,7 +57,7 @@ public class WhitePawn extends Pawn {
 
         //Уничтожение вражеской фигуры справа по диагонали от пешки
         if (this.getPositionInArrayX() != 7 && this.getPositionInArrayY() != 0)
-            figure = Data.figuresArray[this.getPositionInArrayY() - 1][this.getPositionInArrayX() + 1];
+            figure = ChessBoardLogic.figuresArray[this.getPositionInArrayY() - 1][this.getPositionInArrayX() + 1];
 
         if (this.getPositionInArrayY() != 0 && (figure != null && !figure.getColor().equals(this.getColor()) && this.getPositionInArrayX() != 7)) {
             steps[this.getPositionInArrayY() - 1][this.getPositionInArrayX() + 1] = true;

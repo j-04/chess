@@ -1,6 +1,6 @@
 package com.app.chess.Figures.BlackPieces;
 
-import com.app.chess.Data.Data;
+import com.app.chess.Core.ChessBoard.ChessBoardLogic;
 import com.app.chess.Figures.AbstractPieces.Pawn;
 import com.app.chess.Figures.Figure;
 
@@ -44,7 +44,7 @@ public class BlackPawn extends Pawn {
         }
 
         //Ход на одну клетку вперед
-        if (this.getPositionInArrayY() != 7 && (Data.figuresArray[this.getPositionInArrayY() + 1][this.getPositionInArrayX()] == null)) {
+        if (this.getPositionInArrayY() != 7 && (ChessBoardLogic.figuresArray[this.getPositionInArrayY() + 1][this.getPositionInArrayX()] == null)) {
             steps[this.getPositionInArrayY() + 1][this.getPositionInArrayX()] = true;
         }
 
@@ -52,7 +52,7 @@ public class BlackPawn extends Pawn {
 
         //Уничтожение вражеской фигуры слева по диагонали от пешки
         if (this.getPositionInArrayX() != 0 && this.getPositionInArrayY() != 7)
-            figure = Data.figuresArray[this.getPositionInArrayY() + 1][this.getPositionInArrayX() - 1];
+            figure = ChessBoardLogic.figuresArray[this.getPositionInArrayY() + 1][this.getPositionInArrayX() - 1];
 
         if (figure != null && !figure.getColor().equals(this.getColor()) && this.getPositionInArrayX() != 0 && this.getPositionInArrayY() != 7) {
             steps[this.getPositionInArrayY() + 1][this.getPositionInArrayX() - 1] = true;
@@ -60,7 +60,7 @@ public class BlackPawn extends Pawn {
 
         //Уничтожение вражеской фигуры справа по диагонали от пешки
         if (this.getPositionInArrayX() != 7  && this.getPositionInArrayY() != 7)
-            figure = Data.figuresArray[this.getPositionInArrayY() + 1][this.getPositionInArrayX() + 1];
+            figure = ChessBoardLogic.figuresArray[this.getPositionInArrayY() + 1][this.getPositionInArrayX() + 1];
 
         if (figure != null && !figure.getColor().equals(this.getColor()) && this.getPositionInArrayX() != 7 && this.getPositionInArrayY() != 7) {
             steps[this.getPositionInArrayY() + 1][this.getPositionInArrayX() + 1] = true;
