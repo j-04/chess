@@ -19,6 +19,8 @@ public class WhiteKnight extends Knight {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        add(label);
     }
 
     @Override

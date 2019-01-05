@@ -43,6 +43,8 @@ public class ChessBoardGraphics extends JFrame {
         createBlackPieces();
         createWhitePieces();
 
+        chessBoardLogic.predictStepsOfAllFigures();
+
         setVisible(true);
     }
 
