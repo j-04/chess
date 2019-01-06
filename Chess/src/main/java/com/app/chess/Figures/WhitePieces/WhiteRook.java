@@ -23,14 +23,14 @@ public class WhiteRook extends Rook {
         }
 
         add(label);
-        predictSteps();
     }
 
     @Override
     public void predictSteps() {
         int x = this.getPositionInArrayX();
         int y = this.getPositionInArrayY();
-        boolean metAnFigure = false;
+        boolean metAnAllyFigure = false;
+        boolean metAnEnemyFigure = false;
 
         //Очистка массива с предиктами ходов
         for (int i = 0; i < steps.length; i++) {
@@ -39,27 +39,90 @@ public class WhiteRook extends Rook {
             }
         }
 
-        System.out.println(x);
-        System.out.println(y);
-
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                if (!metAnFigure) {
-                    metAnFigure = checkForOtherFigure(i, j);
-                }
-                if (i == y && metAnFigure) {
-                    steps[i][j] = true;
-                }
-                if (j == x && metAnFigure) {
-                    steps[i][j] = true;
-                }
-                System.out.print(steps[i][j]);
+        //Предикт ходов по вертикали вверх от позиции фигуры
+        for (int i = y; i >= 0; i--) {
+            if (!metAnAllyFigure) {
+                metAnAllyFigure = checkForAllyFigure(x, i);
             }
-            System.out.println();
+
+            if (!metAnEnemyFigure) {
+                metAnEnemyFigure = checkForEnemyFigure(x, i);
+                if (metAnEnemyFigure) {
+                    this.steps[i][x] = true;
+                }
+            }
+
+            if (!metAnAllyFigure && !metAnEnemyFigure){
+                this.steps[i][x] = true;
+            }
+        }
+
+        metAnAllyFigure = false;
+        metAnEnemyFigure = false;
+        //Предикт ходов по вертикали вниз от позиции фигуры
+        for (int i = y; i < 8; i++) {
+            if (!metAnAllyFigure) {
+                metAnAllyFigure = checkForAllyFigure(x, i);
+            }
+
+            if (!metAnEnemyFigure) {
+                metAnEnemyFigure = checkForEnemyFigure(x, i);
+                if (metAnEnemyFigure) {
+                    this.steps[i][x] = true;
+                }
+            }
+
+            if (!metAnAllyFigure && !metAnEnemyFigure){
+                this.steps[i][x] = true;
+            }
+        }
+
+        metAnAllyFigure = false;
+        metAnEnemyFigure = false;
+        //Предикт ходов по горизонтали влево от позиции фигуры
+        for (int i = x; i >= 0; i--) {
+            if (!metAnAllyFigure) {
+                metAnAllyFigure = checkForAllyFigure(i, y);
+            }
+
+            if (!metAnEnemyFigure) {
+                metAnEnemyFigure = checkForEnemyFigure(i, y);
+                if (metAnEnemyFigure) {
+                    this.steps[y][i] = true;
+                }
+            }
+
+            if (!metAnAllyFigure && !metAnEnemyFigure) {
+                this.steps[y][i] = true;
+            }
+        }
+
+        metAnAllyFigure = false;
+        metAnEnemyFigure = false;
+        //Предикт ходов по горизонтали вправо от позиции фигуры
+        for (int i = x; i < 8; i++) {
+            if (!metAnAllyFigure) {
+                metAnAllyFigure = checkForAllyFigure(i, y);
+            }
+
+            if (!metAnEnemyFigure) {
+                metAnEnemyFigure = checkForEnemyFigure(i, y);
+                if (metAnEnemyFigure) {
+                    this.steps[y][i] = true;
+                }
+            }
+
+            if (!metAnAllyFigure && !metAnEnemyFigure) {
+                this.steps[y][i] = true;
+            }
         }
     }
 
-    private boolean checkForOtherFigure(int x, int y) {
-        return ChessBoardLogic.figuresArray[y][x] != null && ChessBoardLogic.figuresArray[y][x] != this;
+    private boolean checkForAllyFigure(int x, int y) {
+        return ChessBoardLogic.figuresArray[y][x] != null && ChessBoardLogic.figuresArray[y][x].getColor().equals(this.getColor()) && ChessBoardLogic.figuresArray[y][x] != this;
+    }
+
+    private boolean checkForEnemyFigure(int x, int y) {
+        return ChessBoardLogic.figuresArray[y][x] != null && !ChessBoardLogic.figuresArray[y][x].getColor().equals(this.getColor());
     }
 }
