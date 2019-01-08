@@ -25,7 +25,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.app.chess.StartGUI</mainClass>
+                            <mainClass>com.app.chess.Run</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

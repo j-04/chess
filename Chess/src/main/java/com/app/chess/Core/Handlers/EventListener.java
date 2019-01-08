@@ -24,6 +24,7 @@ public class EventListener extends MouseAdapter {
         super.mousePressed(e);
         old = e.getPoint();
         containPane.moveToFront(piece);
+        piece.showFigureMoves();
     }
 
     @Override
@@ -33,7 +34,6 @@ public class EventListener extends MouseAdapter {
             piece.setBounds(piece.getX() + e.getX() - (int) old.getX(), piece.getY() + e.getY() - (int) old.getY(), piece.getWidth(), piece.getHeight());
         else
             stayOnBoard();
-
     }
 
     @Override
@@ -41,6 +41,7 @@ public class EventListener extends MouseAdapter {
         super.mouseReleased(e);
         stayOnBoard();
         moveHandler.moveFigure();
+        piece.returnNativeCellColor();
     }
 
     private void stayOnBoard() {

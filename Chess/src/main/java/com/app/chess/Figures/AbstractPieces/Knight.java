@@ -7,7 +7,7 @@ import java.awt.*;
 public abstract class Knight extends Figure {
     public Knight(int x, int y, Color color){
         moveTo(x, y);
-        setBackground(color);
+        setOpaque(false);
         setColor(color);
         setBounds(getPositionOnBoardX(),getPositionOnBoardY(), getWidth(), getHeight());
     }

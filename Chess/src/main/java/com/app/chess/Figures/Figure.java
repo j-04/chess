@@ -1,5 +1,8 @@
 package com.app.chess.Figures;
 
+import com.app.chess.Core.ChessBoard.ChessBoardLogic;
+import com.app.chess.Figures.OtherPieces.ChessBoardCell;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -76,5 +79,26 @@ public abstract class Figure extends JPanel implements IFigure {
         this.positionInArrayY = y;
         this.positionOnBoardX = x * 100;
         this.positionOnBoardY = y * 100;
+    }
+
+    public void showFigureMoves() {
+        for (int y = 0; y < 8; y++) {
+            for (int x = 0; x < 8; x++) {
+                if (steps[y][x]) {
+                    ChessBoardCell panel = ChessBoardLogic.panelsArray[y][x];
+                    panel.setNewColor(new Color(0, 100, 0));
+                    panel.setBorder(BorderFactory.createLineBorder(panel.getNativeColor(), 5));
+                }
+            }
+        }
+    }
+
+    public void returnNativeCellColor() {
+        for (int y = 0; y < 8; y++) {
+            for (int x = 0; x < 8; x++) {
+                ChessBoardCell panel = ChessBoardLogic.panelsArray[y][x];
+                panel.setNativeColor();
+            }
+        }
     }
 }

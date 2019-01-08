@@ -1,6 +1,7 @@
 package com.app.chess.Core.ChessBoard;
 
 import com.app.chess.Figures.Figure;
+import com.app.chess.Figures.OtherPieces.ChessBoardCell;
 
 import javax.swing.*;
 import java.util.LinkedList;
@@ -8,6 +9,8 @@ import java.util.LinkedList;
 public class ChessBoardLogic {
     public static final Figure[][] figuresArray = new Figure[8][8];
     public static final LinkedList<Figure> figuresList = new LinkedList<>();
+    public static final ChessBoardCell[][] panelsArray = new ChessBoardCell[8][8];
+
     private JLayeredPane layeredPane;
 
     public void removeFigure(Figure figureToRemove) {

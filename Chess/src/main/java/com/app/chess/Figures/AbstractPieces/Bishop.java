@@ -5,10 +5,9 @@ import com.app.chess.Figures.Figure;
 import java.awt.*;
 
 public abstract class Bishop extends Figure {
-
     public Bishop(int x, int y, Color color){
         moveTo(x, y);
-        setBackground(color);
+        setOpaque(false);
         setColor(color);
         setBounds(getPositionOnBoardX(),getPositionOnBoardY(), getWidth(), getHeight());
     }

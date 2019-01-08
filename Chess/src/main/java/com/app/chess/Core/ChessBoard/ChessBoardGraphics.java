@@ -3,6 +3,7 @@ package com.app.chess.Core.ChessBoard;
 import com.app.chess.Core.Handlers.EventListener;
 import com.app.chess.Core.Handlers.MoveHandler;
 import com.app.chess.Figures.BlackPieces.*;
+import com.app.chess.Figures.OtherPieces.ChessBoardCell;
 import com.app.chess.Figures.WhitePieces.*;
 
 import javax.swing.*;
@@ -60,15 +61,16 @@ public class ChessBoardGraphics extends JFrame {
             short boardWidth = 800;
 
             for (int x = 0; x < boardWidth; x = x + 100) {
-                JPanel panel = new JPanel();
+                Color cellColor;
 
                 if (color)
-                    panel.setBackground(Color.BLACK);
+                    cellColor = new Color(139,69,19);
                 else
-                    panel.setBackground(Color.WHITE);
+                    cellColor = new Color(222,184,136);
 
-                panel.setBounds(x,y,100,100);
-                layeredPane.add(panel, 0);
+                ChessBoardCell chessBoardCell = new ChessBoardCell(x, y, 100, 100 , cellColor);
+                ChessBoardLogic.panelsArray[y/100][x/100] = chessBoardCell;
+                layeredPane.add(chessBoardCell, 0);
                 color = !color;
             }
             color = !color;

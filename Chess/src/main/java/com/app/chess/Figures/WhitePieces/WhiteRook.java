@@ -45,14 +45,13 @@ public class WhiteRook extends Rook {
                 metAnAllyFigure = checkForAllyFigure(x, i);
             }
 
-            if (!metAnEnemyFigure) {
-                metAnEnemyFigure = checkForEnemyFigure(x, i);
-                if (metAnEnemyFigure) {
-                    this.steps[i][x] = true;
-                }
-            }
+            if (!metAnAllyFigure && !metAnEnemyFigure) {
+                this.steps[i][x] = true;
+            } else
+                continue;
 
-            if (!metAnAllyFigure && !metAnEnemyFigure){
+            metAnEnemyFigure = checkForEnemyFigure(x, i);
+            if (metAnEnemyFigure) {
                 this.steps[i][x] = true;
             }
         }
@@ -65,14 +64,13 @@ public class WhiteRook extends Rook {
                 metAnAllyFigure = checkForAllyFigure(x, i);
             }
 
-            if (!metAnEnemyFigure) {
-                metAnEnemyFigure = checkForEnemyFigure(x, i);
-                if (metAnEnemyFigure) {
-                    this.steps[i][x] = true;
-                }
-            }
+            if (!metAnAllyFigure && !metAnEnemyFigure) {
+                this.steps[i][x] = true;
+            } else
+                continue;
 
-            if (!metAnAllyFigure && !metAnEnemyFigure){
+            metAnEnemyFigure = checkForEnemyFigure(x, i);
+            if (metAnEnemyFigure) {
                 this.steps[i][x] = true;
             }
         }
@@ -85,14 +83,13 @@ public class WhiteRook extends Rook {
                 metAnAllyFigure = checkForAllyFigure(i, y);
             }
 
-            if (!metAnEnemyFigure) {
-                metAnEnemyFigure = checkForEnemyFigure(i, y);
-                if (metAnEnemyFigure) {
-                    this.steps[y][i] = true;
-                }
-            }
-
             if (!metAnAllyFigure && !metAnEnemyFigure) {
+                this.steps[y][i] = true;
+            } else
+                continue;
+
+            metAnEnemyFigure = checkForEnemyFigure(i, y);
+            if (metAnEnemyFigure) {
                 this.steps[y][i] = true;
             }
         }
@@ -105,14 +102,13 @@ public class WhiteRook extends Rook {
                 metAnAllyFigure = checkForAllyFigure(i, y);
             }
 
-            if (!metAnEnemyFigure) {
-                metAnEnemyFigure = checkForEnemyFigure(i, y);
-                if (metAnEnemyFigure) {
-                    this.steps[y][i] = true;
-                }
-            }
-
             if (!metAnAllyFigure && !metAnEnemyFigure) {
+                this.steps[y][i] = true;
+            } else
+                continue;
+
+            metAnEnemyFigure = checkForEnemyFigure(i, y);
+            if (metAnEnemyFigure) {
                 this.steps[y][i] = true;
             }
         }
