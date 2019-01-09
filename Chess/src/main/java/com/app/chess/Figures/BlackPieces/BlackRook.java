@@ -46,7 +46,8 @@ public class BlackRook extends Rook {
             }
 
             if (!metAnAllyFigure && !metAnEnemyFigure) {
-                this.steps[i][x] = true;
+                if (i != y)
+                    this.steps[i][x] = true;
             } else
                 continue;
 
@@ -65,7 +66,8 @@ public class BlackRook extends Rook {
             }
 
             if (!metAnAllyFigure && !metAnEnemyFigure) {
-                this.steps[i][x] = true;
+                if (i != y)
+                    this.steps[i][x] = true;
             } else
                 continue;
 
@@ -84,7 +86,8 @@ public class BlackRook extends Rook {
             }
 
             if (!metAnAllyFigure && !metAnEnemyFigure) {
-                this.steps[y][i] = true;
+                if (i != x)
+                    this.steps[y][i] = true;
             } else
                 continue;
 
@@ -103,7 +106,8 @@ public class BlackRook extends Rook {
             }
 
             if (!metAnAllyFigure && !metAnEnemyFigure) {
-                this.steps[y][i] = true;
+                if (i != x)
+                    this.steps[y][i] = true;
             } else
                 continue;
 
