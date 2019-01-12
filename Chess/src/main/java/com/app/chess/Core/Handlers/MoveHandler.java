@@ -30,12 +30,11 @@ public class MoveHandler {
             if (((int) centerBoardX > (figureInArrayX) * 100) && ((int) centerBoardX < figureInArrayX * 100 + 100)
                     && ((int) centerBoardY > figureInArrayY * 100) && ((int) centerBoardY < figureInArrayY * 100 + 100)) {
 
-                // Установка фигуры на пустую клетку
+                // Клетка занята союзной фигурой
                 if ((ChessBoardLogic.figuresArray[figureInArrayY][figureInArrayX] != null)
                         && (ChessBoardLogic.figuresArray[figureInArrayY][figureInArrayX].getColor().equals(figure.getColor()))) {
 
-                    figure.setBounds(figure.getPositionOnBoardX(), figure.getPositionOnBoardY(), figure.getWidth(), figure.getHeight());
-                    predictStepsOfAllFigures();
+                    moveFigure(figure.getPositionInArrayX(), figure.getPositionInArrayY());
 
                 } else {
                     // Удаление фигуры с доски
@@ -70,6 +69,7 @@ public class MoveHandler {
 
         isFirstStep();
         predictStepsOfAllFigures();
+        ChessBoardLogic.changeTurn();
     }
 
     private void isFirstStep() {
