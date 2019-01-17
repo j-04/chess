@@ -21,7 +21,6 @@ public abstract class Figure extends JPanel implements IFigure {
     private Color color = null;
 
     public void setColor(Color color){
-
         this.color = color;
 
         if(!color.equals(Color.WHITE))

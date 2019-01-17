@@ -10,11 +10,13 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ChessBoardGraphics extends JFrame {
+    private static ChessBoardGraphics instance;
+
     private JLayeredPane layeredPane;
     private ChessBoardLogic chessBoardLogic;
 
-    public ChessBoardGraphics() {
-        chessBoardLogic = new ChessBoardLogic();
+    private ChessBoardGraphics() {
+        chessBoardLogic = ChessBoardLogic.getInstance(this);
     }
 
     public void start() {
@@ -33,11 +35,11 @@ public class ChessBoardGraphics extends JFrame {
         int screenWidth = screenSize.width;
         int screenHeight = screenSize.height;
         setTitle("Chess");
-        short frameWidth = 817;
-        short frameHeight = 839;
+        short frameWidth = 1217;
+        short frameHeight = 830;
         setSize(frameWidth, frameHeight);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocation((screenWidth- frameWidth)/2, (screenHeight- frameHeight)/2);
+        setLocation((screenWidth- frameWidth)/2, (screenHeight - frameHeight)/2);
         setResizable(false);
 
         createChessBoard();
@@ -82,7 +84,7 @@ public class ChessBoardGraphics extends JFrame {
         for(int y = 0; y <= 7; y++){
             for(int x = 0; x <= 7; x++){
                 if(y == 1){
-                    BlackPawn pawn = new BlackPawn(x,y, Color.WHITE);
+                    BlackPawn pawn = new BlackPawn(x, y, Color.WHITE);
                     MoveHandler moveHandler = new MoveHandler(pawn, chessBoardLogic);
                     EventListener move = new EventListener(pawn, layeredPane, moveHandler);
                     pawn.addMouseListener(move);
@@ -269,5 +271,12 @@ public class ChessBoardGraphics extends JFrame {
         layeredPane.add(queen,0);
         ChessBoardLogic.figuresArray[7][4] = queen;
         ChessBoardLogic.figuresList.add(queen);
+    }
+
+    public static ChessBoardGraphics getInstance() {
+        if (instance == null) {
+            instance = new ChessBoardGraphics();
+        }
+        return instance;
     }
 }

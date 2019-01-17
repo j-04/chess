@@ -50,6 +50,7 @@ public class MoveHandler {
         } else {
             figure.setBounds(figure.getPositionOnBoardX(), figure.getPositionOnBoardY(), figure.getWidth(), figure.getHeight());
         }
+        chessBoardLogic.checkPawnsToChange();
     }
 
     // Удаление фигуры

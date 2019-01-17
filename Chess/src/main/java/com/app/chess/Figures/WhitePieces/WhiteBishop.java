@@ -35,8 +35,6 @@ public class WhiteBishop extends Bishop {
 
         int figureX = this.getPositionInArrayX();
         int figureY = this.getPositionInArrayY();
-        boolean metAnAllyFigure = false;
-        boolean metAnEnemyFigure = false;
 
         //По диагонали влево вверх от позиции фигуры
         predictUpToLeft(figureX, figureY);
