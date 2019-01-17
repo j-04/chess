@@ -35,7 +35,7 @@ public class ChessBoardGraphics extends JFrame {
         int screenWidth = screenSize.width;
         int screenHeight = screenSize.height;
         setTitle("Chess");
-        short frameWidth = 1217;
+        short frameWidth = 800;
         short frameHeight = 830;
         setSize(frameWidth, frameHeight);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
