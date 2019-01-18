@@ -1,5 +1,6 @@
 package com.app.chess.Core.Handlers;
 
+import com.app.chess.Core.ChessBoard.ChessBoardGraphics;
 import com.app.chess.Core.ChessBoard.ChessBoardLogic;
 import com.app.chess.Figures.AbstractPieces.Pawn;
 import com.app.chess.Figures.BlackPieces.BlackBishop;
@@ -55,7 +56,7 @@ public class Mouse implements MouseListener {
 
     private void determinateAndChangeFigure() {
         ChessBoardLogic chessBoardLogic = ChessBoardLogic.getInstance();
-        JLayeredPane layeredPane = ChessBoardLogic.getInstance().getLayeredPane();
+        ChessBoardGraphics chessBoardGraphics = ChessBoardGraphics.getInstance();
 
         int x = figure.getPositionInArrayX();
         int y = figure.getPositionInArrayY();
@@ -64,90 +65,89 @@ public class Mouse implements MouseListener {
         switch(owner.getName()) {
             case "WhiteRook":
                 WhiteRook rook = new WhiteRook(x, y, Color.BLACK);
-                MoveHandler moveRook = new MoveHandler(rook, chessBoardLogic);
-                EventListener eventRook = new EventListener(rook, layeredPane, moveRook);
+                MoveHandler moveRook = new MoveHandler(rook);
+                EventListener eventRook = new EventListener(rook, moveRook);
                 rook.addMouseListener(eventRook);
                 rook.addMouseMotionListener(eventRook);
-                layeredPane.add(rook,0);
                 ChessBoardLogic.figuresArray[y][x] = rook;
                 ChessBoardLogic.figuresList.add(rook);
+                chessBoardGraphics.render();
                 break;
 
             case "WhiteKnight":
                 WhiteKnight knight = new WhiteKnight(x, y, Color.BLACK);
-                MoveHandler moveKnight = new MoveHandler(knight, chessBoardLogic);
-                EventListener eventKnight = new EventListener(knight, layeredPane, moveKnight);
+                MoveHandler moveKnight = new MoveHandler(knight);
+                EventListener eventKnight = new EventListener(knight, moveKnight);
                 knight.addMouseListener(eventKnight);
                 knight.addMouseMotionListener(eventKnight);
-                layeredPane.add(knight,0);
                 ChessBoardLogic.figuresArray[y][x] = knight;
                 ChessBoardLogic.figuresList.add(knight);
+                chessBoardGraphics.render();
                 break;
 
             case "WhiteBishop":
                 WhiteBishop bishop = new WhiteBishop(x, y, Color.BLACK);
-                MoveHandler moveBishop = new MoveHandler(bishop, chessBoardLogic);
-                EventListener eventBishop = new EventListener(bishop, layeredPane, moveBishop);
+                MoveHandler moveBishop = new MoveHandler(bishop);
+                EventListener eventBishop = new EventListener(bishop, moveBishop);
                 bishop.addMouseListener(eventBishop);
                 bishop.addMouseMotionListener(eventBishop);
-                layeredPane.add(bishop,0);
                 ChessBoardLogic.figuresArray[y][x] = bishop;
                 ChessBoardLogic.figuresList.add(bishop);
+                chessBoardGraphics.render();
                 break;
 
             case "WhiteQueen":
                 WhiteQueen queen = new WhiteQueen(x, y, Color.BLACK);
-                MoveHandler moveQueen = new MoveHandler(queen, chessBoardLogic);
-                EventListener eventQueen = new EventListener(queen, layeredPane, moveQueen);
+                MoveHandler moveQueen = new MoveHandler(queen);
+                EventListener eventQueen = new EventListener(queen, moveQueen);
                 queen.addMouseListener(eventQueen);
                 queen.addMouseMotionListener(eventQueen);
-                layeredPane.add(queen,0);
                 ChessBoardLogic.figuresArray[y][x] = queen;
                 ChessBoardLogic.figuresList.add(queen);
+                chessBoardGraphics.render();
                 break;
 
             case "BlackRook":
                 BlackRook blackRook = new BlackRook(x, y, Color.WHITE);
-                MoveHandler moveRook1 = new MoveHandler(blackRook, chessBoardLogic);
-                EventListener eventRook1 = new EventListener(blackRook, layeredPane, moveRook1);
+                MoveHandler moveRook1 = new MoveHandler(blackRook);
+                EventListener eventRook1 = new EventListener(blackRook, moveRook1);
                 blackRook.addMouseListener(eventRook1);
                 blackRook.addMouseMotionListener(eventRook1);
-                layeredPane.add(blackRook,0);
                 ChessBoardLogic.figuresArray[y][x] = blackRook;
                 ChessBoardLogic.figuresList.add(blackRook);
+                chessBoardGraphics.render();
                 break;
 
             case "BlackKnight":
                 BlackKnight blackKnight = new BlackKnight(x, y, Color.WHITE);
-                MoveHandler moveKnight1 = new MoveHandler(blackKnight, chessBoardLogic);
-                EventListener eventKnight1 = new EventListener(blackKnight, layeredPane, moveKnight1);
+                MoveHandler moveKnight1 = new MoveHandler(blackKnight);
+                EventListener eventKnight1 = new EventListener(blackKnight, moveKnight1);
                 blackKnight.addMouseListener(eventKnight1);
                 blackKnight.addMouseMotionListener(eventKnight1);
-                layeredPane.add(blackKnight,0);
                 ChessBoardLogic.figuresArray[y][x] = blackKnight;
                 ChessBoardLogic.figuresList.add(blackKnight);
                 break;
 
             case "BlackBishop":
                 BlackBishop blackBishop = new BlackBishop(x, y, Color.WHITE);
-                MoveHandler moveBishop1 = new MoveHandler(blackBishop, chessBoardLogic);
-                EventListener eventBishop1 = new EventListener(blackBishop, layeredPane, moveBishop1);
+                MoveHandler moveBishop1 = new MoveHandler(blackBishop);
+                EventListener eventBishop1 = new EventListener(blackBishop, moveBishop1);
                 blackBishop.addMouseListener(eventBishop1);
                 blackBishop.addMouseMotionListener(eventBishop1);
-                layeredPane.add(blackBishop,0);
                 ChessBoardLogic.figuresArray[y][x] = blackBishop;
                 ChessBoardLogic.figuresList.add(blackBishop);
+                chessBoardGraphics.render();
                 break;
 
             case "BlackQueen":
                 BlackQueen blackQueen = new BlackQueen(x, y, Color.WHITE);
-                MoveHandler moveQueen1 = new MoveHandler(blackQueen, chessBoardLogic);
-                EventListener eventQueen1 = new EventListener(blackQueen, layeredPane, moveQueen1);
+                MoveHandler moveQueen1 = new MoveHandler(blackQueen);
+                EventListener eventQueen1 = new EventListener(blackQueen, moveQueen1);
                 blackQueen.addMouseListener(eventQueen1);
                 blackQueen.addMouseMotionListener(eventQueen1);
-                layeredPane.add(blackQueen,0);
                 ChessBoardLogic.figuresArray[y][x] = blackQueen;
                 ChessBoardLogic.figuresList.add(blackQueen);
+                chessBoardGraphics.render();
                 break;
         }
     }

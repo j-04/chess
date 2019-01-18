@@ -1,5 +1,6 @@
 package com.app.chess.Core.Handlers;
 
+import com.app.chess.Core.ChessBoard.ChessBoardGraphics;
 import com.app.chess.Core.ChessBoard.ChessBoardLogic;
 import com.app.chess.Figures.Figure;
 
@@ -10,10 +11,10 @@ public class MoveHandler {
     private boolean[][] figuresSteps;
     private ChessBoardLogic chessBoardLogic;
 
-    public MoveHandler(Figure figure, ChessBoardLogic chessBoardLogic) {
+    public MoveHandler(Figure figure) {
         this.figure = figure;
         this.figuresSteps = figure.getSteps();
-        this.chessBoardLogic = chessBoardLogic;
+        this.chessBoardLogic = ChessBoardLogic.getInstance();
     }
 
     public void moveFigure(){

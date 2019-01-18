@@ -1,5 +1,6 @@
 package com.app.chess.Core.Handlers;
 
+import com.app.chess.Core.ChessBoard.ChessBoardGraphics;
 import com.app.chess.Core.ChessBoard.ChessBoardLogic;
 import com.app.chess.Figures.Figure;
 
@@ -11,13 +12,13 @@ import java.awt.event.MouseEvent;
 public class EventListener extends MouseAdapter {
     private Point old;
     private Figure piece;
-    private JLayeredPane containPane;
+    private JLayeredPane contentPane;
     private MoveHandler moveHandler;
 
-    public EventListener(Figure piece, JLayeredPane containPane, MoveHandler moveHandler) {
+    public EventListener(Figure piece, MoveHandler moveHandler) {
         this.piece = piece;
         this.moveHandler = moveHandler;
-        this.containPane = containPane;
+        this.contentPane = ChessBoardGraphics.getInstance().getLayeredPane();
     }
 
     @Override
@@ -25,13 +26,13 @@ public class EventListener extends MouseAdapter {
         super.mousePressed(e);
         if (checkTurn() == 1) {
             old = e.getPoint();
-            containPane.moveToFront(piece);
+            contentPane.moveToFront(piece);
             piece.showFigureMoves();
         }
 
         if (checkTurn() == 0) {
             old = e.getPoint();
-            containPane.moveToFront(piece);
+            contentPane.moveToFront(piece);
             piece.showFigureMoves();
         }
     }

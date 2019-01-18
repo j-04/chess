@@ -21,17 +21,13 @@ public class ChessBoardLogic {
     private JFrame root;
     private static ChessBoardLogic instance;
 
-    private ChessBoardLogic(JFrame root) {
+    private ChessBoardLogic(JFrame root, JLayeredPane layeredPane) {
+        this.layeredPane = layeredPane;
         this.root = root;
     }
 
     public void removeFigure(Figure figureToRemove) {
-        System.out.println(figureToRemove);
-        System.out.println(figureToRemove.getPositionInArrayY());
-        System.out.println(figureToRemove.getPositionInArrayX());
-
-        boolean a = ChessBoardLogic.figuresList.remove(figureToRemove);
-        System.out.println(a);
+        ChessBoardLogic.figuresList.remove(figureToRemove);
         ChessBoardLogic.figuresArray[figureToRemove.getPositionInArrayY()][figureToRemove.getPositionInArrayX()] = null;
         layeredPane.remove(figureToRemove);
     }
@@ -85,11 +81,10 @@ public class ChessBoardLogic {
         flag = !flag;
     }
 
-    public static ChessBoardLogic getInstance(JFrame root) {
+    public static void setInstance(JFrame root, JLayeredPane layeredPane) {
         if (instance == null) {
-            instance = new ChessBoardLogic(root);
+            instance = new ChessBoardLogic(root, layeredPane);
         }
-        return instance;
     }
 
     public static ChessBoardLogic getInstance() {
@@ -97,9 +92,5 @@ public class ChessBoardLogic {
             throw new NullPointerException();
         }
         return instance;
-    }
-
-    public JLayeredPane getLayeredPane() {
-        return this.layeredPane;
     }
 }
