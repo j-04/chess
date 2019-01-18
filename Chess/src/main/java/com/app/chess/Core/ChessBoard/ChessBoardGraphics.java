@@ -36,9 +36,9 @@ public class ChessBoardGraphics extends JFrame {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = screenSize.width;
         int screenHeight = screenSize.height;
-        setTitle("Chess");
         short frameWidth = 800;
         short frameHeight = 830;
+        setTitle("Chess");
         setSize(frameWidth, frameHeight);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocation((screenWidth- frameWidth)/2, (screenHeight - frameHeight)/2);
@@ -49,6 +49,7 @@ public class ChessBoardGraphics extends JFrame {
         createWhitePieces();
 
         chessBoardLogic.predictStepsOfAllFigures();
+        render();
 
         setVisible(true);
     }
@@ -254,8 +255,6 @@ public class ChessBoardGraphics extends JFrame {
         queen.addMouseMotionListener(eventQueen);
         ChessBoardLogic.figuresArray[7][4] = queen;
         ChessBoardLogic.figuresList.add(queen);
-
-        render();
     }
 
     public void render() {
