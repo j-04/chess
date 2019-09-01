@@ -1,2 +1,2 @@
 # Chess
-The usual chess game
+Simple chess game
