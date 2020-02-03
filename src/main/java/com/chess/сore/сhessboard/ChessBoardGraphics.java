@@ -1,11 +1,10 @@
 package com.chess.сore.сhessboard;
 
 import com.chess.сore.figures.abstrac.Figure;
-import com.chess.сore.figures.black.*;
+import com.chess.сore.figures.factory.BlackFigureFactory;
+import com.chess.сore.figures.factory.FigureFactory;
+import com.chess.сore.figures.factory.WhiteFigureFactory;
 import com.chess.сore.figures.other.ChessBoardCell;
-import com.chess.сore.figures.white.*;
-import com.chess.сore.handlers.EventListener;
-import com.chess.сore.handlers.MoveHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -82,178 +81,58 @@ public class ChessBoardGraphics extends JFrame {
     }
 
     private void createBlackPieces() {
+        FigureFactory figureFactory = new BlackFigureFactory();
         //PAWNS
         for(int y = 0; y <= 7; y++) {
             for(int x = 0; x <= 7; x++) {
                 if(y == 1){
-                    BlackPawn pawn = new BlackPawn(x, y, Color.WHITE);
-                    MoveHandler moveHandler = new MoveHandler(pawn);
-                    EventListener move = new EventListener(pawn, moveHandler);
-                    pawn.addMouseListener(move);
-                    pawn.addMouseMotionListener(move);
-                    ChessBoardLogic.figuresArray[y][x] = pawn;
-                    ChessBoardLogic.figuresList.add(pawn);
-                } else
-                    ChessBoardLogic.figuresArray[y][x] = null;
+                    registerFigure(x, y, figureFactory.createPawn(x, y));
+                }
             }
         }
-
         //ROOKS
-        BlackRook rook = new BlackRook(0,0,Color.WHITE);
-        MoveHandler moveRook1 = new MoveHandler(rook);
-        EventListener eventRook1 = new EventListener(rook, moveRook1);
-        rook.addMouseListener(eventRook1);
-        rook.addMouseMotionListener(eventRook1);
-        ChessBoardLogic.figuresArray[0][0] = rook;
-        ChessBoardLogic.figuresList.add(rook);
-
-        BlackRook rook2 = new BlackRook(7,0,Color.WHITE);
-        MoveHandler moveRook2 = new MoveHandler(rook2);
-        EventListener eventRook2 = new EventListener(rook2, moveRook2);
-        rook2.addMouseListener(eventRook2);
-        rook2.addMouseMotionListener(eventRook2);
-        ChessBoardLogic.figuresArray[0][7] = rook2;
-        ChessBoardLogic.figuresList.add(rook2);
-
+        registerFigure(0, 0, figureFactory.createRook(0, 0));
+        registerFigure(7, 0, figureFactory.createRook(7, 0));
         //KNIGHTS
-        BlackKnight knight = new BlackKnight(1,0, Color.WHITE);
-        MoveHandler moveKnight1 = new MoveHandler(knight);
-        EventListener eventKnight1 = new EventListener(knight, moveKnight1);
-        knight.addMouseListener(eventKnight1);
-        knight.addMouseMotionListener(eventKnight1);
-        ChessBoardLogic.figuresArray[0][1] = knight;
-        ChessBoardLogic.figuresList.add(knight);
-
-
-        BlackKnight knight2 = new BlackKnight(6,0,Color.WHITE);
-        MoveHandler moveKnight2 = new MoveHandler(knight2);
-        EventListener eventKnight2 = new EventListener(knight2, moveKnight2);
-        knight2.addMouseListener(eventKnight2);
-        knight2.addMouseMotionListener(eventKnight2);
-        ChessBoardLogic.figuresArray[0][6] = knight2;
-        ChessBoardLogic.figuresList.add(knight2);
-
+        registerFigure(1, 0, figureFactory.createKnight(1, 0));
+        registerFigure(6, 0, figureFactory.createKnight(6, 0));
         //BISHOPS
-        BlackBishop bishop = new BlackBishop(2,0, Color.WHITE);
-        MoveHandler moveBishop = new MoveHandler(bishop);
-        EventListener eventBishop1 = new EventListener(bishop, moveBishop);
-        bishop.addMouseListener(eventBishop1);
-        bishop.addMouseMotionListener(eventBishop1);
-        ChessBoardLogic.figuresArray[0][2] = bishop;
-        ChessBoardLogic.figuresList.add(bishop);
-
-        BlackBishop bishop2 = new BlackBishop(5,0, Color.WHITE);
-        MoveHandler moveBishop2 = new MoveHandler(bishop2);
-        EventListener eventBishop2 = new EventListener(bishop2, moveBishop2);
-        bishop2.addMouseListener(eventBishop2);
-        bishop2.addMouseMotionListener(eventBishop2);
-        ChessBoardLogic.figuresArray[0][5] = bishop2;
-        ChessBoardLogic.figuresList.add(bishop2);
-
+        registerFigure(2, 0, figureFactory.createBishop(2, 0));
+        registerFigure(5, 0, figureFactory.createBishop(5, 0));
         //KING
-        BlackKing king = new BlackKing(3, 0, Color.WHITE);
-        MoveHandler moveKing = new MoveHandler(king);
-        EventListener eventKing = new EventListener(king, moveKing);
-        king.addMouseListener(eventKing);
-        king.addMouseMotionListener(eventKing);
-        ChessBoardLogic.figuresArray[0][3] = king;
-        ChessBoardLogic.figuresList.add(king);
-
+        registerFigure(3, 0, figureFactory.createKing(3, 0));
         //QUEEN
-        BlackQueen queen = new BlackQueen(4,0,Color.WHITE);
-        MoveHandler moveQueen = new MoveHandler(queen);
-        EventListener eventQueen = new EventListener(queen, moveQueen);
-        queen.addMouseListener(eventQueen);
-        queen.addMouseMotionListener(eventQueen);
-        ChessBoardLogic.figuresArray[0][4] = queen;
-        ChessBoardLogic.figuresList.add(queen);
-
+        registerFigure(4, 0, figureFactory.createQueen(4, 0));
     }
 
     private void createWhitePieces() {
+        FigureFactory figureFactory = new WhiteFigureFactory();
         //PAWNS
         for (int y = 0; y <= 7; y++) {
             for (int x = 0; x <= 7; x++) {
                 if (y == 6) {
-                    WhitePawn pawn = new WhitePawn(x,   y, Color.BLACK);
-                    MoveHandler move = new MoveHandler(pawn);
-                    EventListener event = new EventListener(pawn, move);
-                    pawn.addMouseListener(event);
-                    pawn.addMouseMotionListener(event);
-                    ChessBoardLogic.figuresArray[y][x] = pawn;
-                    ChessBoardLogic.figuresList.add(pawn);
+                    registerFigure(x, y, figureFactory.createPawn(x, y));
                 }
             }
         }
-
         //ROOKS
-        WhiteRook rook = new WhiteRook(0,7,Color.BLACK);
-        MoveHandler moveRook = new MoveHandler(rook);
-        EventListener eventRook = new EventListener(rook, moveRook);
-        rook.addMouseListener(eventRook);
-        rook.addMouseMotionListener(eventRook);
-        ChessBoardLogic.figuresArray[7][0] = rook;
-        ChessBoardLogic.figuresList.add(rook);
-
-        WhiteRook rook2 = new WhiteRook(7,7,Color.BLACK);
-        MoveHandler moveRook2 = new MoveHandler(rook2);
-        EventListener eventRook2 = new EventListener(rook2, moveRook2);
-        rook2.addMouseListener(eventRook2);
-        rook2.addMouseMotionListener(eventRook2);
-        ChessBoardLogic.figuresArray[7][7] = rook2;
-        ChessBoardLogic.figuresList.add(rook2);
-
+        registerFigure(0, 7, figureFactory.createRook(0, 7));
+        registerFigure(7, 7, figureFactory.createRook(7, 7));
         //KNIGHTS
-        WhiteKnight knight = new WhiteKnight(1,7, Color.BLACK);
-        MoveHandler moveKnight = new MoveHandler(knight);
-        EventListener eventKnight = new EventListener(knight, moveKnight);
-        knight.addMouseListener(eventKnight);
-        knight.addMouseMotionListener(eventKnight);
-        ChessBoardLogic.figuresArray[7][1] = knight;
-        ChessBoardLogic.figuresList.add(knight);
-
-        WhiteKnight knight2 = new WhiteKnight(6,7,Color.BLACK);
-        MoveHandler moveKnight2 = new MoveHandler(knight2);
-        EventListener eventKnight2 = new EventListener(knight2, moveKnight2);
-        knight2.addMouseListener(eventKnight2);
-        knight2.addMouseMotionListener(eventKnight2);
-        ChessBoardLogic.figuresArray[7][6] = knight2;
-        ChessBoardLogic.figuresList.add(knight2);
-
+        registerFigure(1, 7, figureFactory.createRook(1, 7));
+        registerFigure(6, 7, figureFactory.createRook(6, 7));
         //BISHOPS
-        WhiteBishop bishop = new WhiteBishop(2,7, Color.BLACK);
-        MoveHandler moveBishop = new MoveHandler(bishop);
-        EventListener eventBishop = new EventListener(bishop, moveBishop);
-        bishop.addMouseListener(eventBishop);
-        bishop.addMouseMotionListener(eventBishop);
-        ChessBoardLogic.figuresArray[7][2] = bishop;
-        ChessBoardLogic.figuresList.add(bishop);
-
-        WhiteBishop bishop2 = new WhiteBishop(5,7, Color.BLACK);
-        MoveHandler moveBishop2 = new MoveHandler(bishop2);
-        EventListener eventBishop2 = new EventListener(bishop2, moveBishop2);
-        bishop2.addMouseListener(eventBishop2);
-        bishop2.addMouseMotionListener(eventBishop2);
-        ChessBoardLogic.figuresArray[7][5] = bishop2;
-        ChessBoardLogic.figuresList.add(bishop2);
-
+        registerFigure(2, 7, figureFactory.createBishop(2, 7));
+        registerFigure(5, 7, figureFactory.createBishop(5, 7));
         //KING
-        WhiteKing king = new WhiteKing(3, 7, Color.BLACK);
-        MoveHandler moveKing = new MoveHandler(king);
-        EventListener eventKing = new EventListener(king, moveKing);
-        king.addMouseListener(eventKing);
-        king.addMouseMotionListener(eventKing);
-        ChessBoardLogic.figuresArray[7][3] = king;
-        ChessBoardLogic.figuresList.add(king);
-
+        registerFigure(3, 7, figureFactory.createKing(3, 7));
         //QUEEN
-        WhiteQueen queen = new WhiteQueen(4,7,Color.BLACK);
-        MoveHandler moveQueen = new MoveHandler(queen);
-        EventListener eventQueen = new EventListener(queen, moveQueen);
-        queen.addMouseListener(eventQueen);
-        queen.addMouseMotionListener(eventQueen);
-        ChessBoardLogic.figuresArray[7][4] = queen;
-        ChessBoardLogic.figuresList.add(queen);
+        registerFigure(4, 7, figureFactory.createQueen(4, 7));
+    }
+
+    private void registerFigure(int x, int y, Figure figure) {
+        ChessBoardLogic.figuresArray[y][x] = figure;
+        ChessBoardLogic.figuresList.add(figure);
     }
 
     public void render() {

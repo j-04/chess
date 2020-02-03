@@ -66,7 +66,9 @@ public class MoveHandler {
         ChessBoardLogic.figuresArray[y][x] = null;
         ChessBoardLogic.figuresArray[y][x] = figure;
 
-        figure.moveTo(x,y);
+        figure.setPositionInArrayX(x);
+        figure.setPositionInArrayY(y);
+        figure.move();
 
         isFirstStep();
         predictStepsOfAllFigures();

@@ -1,39 +1,20 @@
 package com.chess.сore.figures.white;
 
-import com.chess.сore.сhessboard.ChessBoardLogic;
 import com.chess.сore.figures.abstrac.King;
-import com.chess.сore.figures.abstrac.Figure;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
 public class WhiteKing extends King {
-    public WhiteKing(int x, int y, Color color) {
-        super(x, y, color);
-        JLabel label = new JLabel();
+    public WhiteKing() {
 
-        try {
-            label.setIcon(new ImageIcon(ImageIO.read(new File("src/main/resources/Chess pieces/Chess_klt60.png"))));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        add(label);
-        predictSteps();
     }
 
     @Override
     public void predictSteps() {
-        //Очистка массива с предиктами ходов
-        for (int i = 0; i < steps.length; i++) {
-            for (int k = 0; k < steps.length; k++) {
-                steps[i][k] = false;
-            }
-        }
-
+        clearPredictions();
         // 1
         int x = this.getPositionInArrayX() - 1;
         int y = this.getPositionInArrayY() - 1;
@@ -92,8 +73,15 @@ public class WhiteKing extends King {
         }
     }
 
-    public boolean checkForAllyFigure(int x, int y) {
-        Figure figure = ChessBoardLogic.figuresArray[y][x];
-        return figure != null && figure.getColor().equals(this.getColor());
+    @Override
+    public void setSettings() {
+        JLabel label = new JLabel();
+        try {
+            label.setIcon(new ImageIcon(ImageIO.read(new File(picturePath))));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        add(label);
+        predictSteps();
     }
 }

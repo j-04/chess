@@ -1,11 +1,15 @@
 package com.chess.сore.figures.abstrac;
 
-import com.chess.сore.сhessboard.ChessBoardLogic;
 import com.chess.сore.figures.other.ChessBoardCell;
+import com.chess.сore.сhessboard.ChessBoardLogic;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
 
+@Getter
+@Setter
 public abstract class Figure extends JPanel implements IFigure {
     private int positionOnBoardX;
     private int positionOnBoardY;
@@ -16,17 +20,13 @@ public abstract class Figure extends JPanel implements IFigure {
     protected boolean firstStep = true;
 
     protected boolean[][] steps = new boolean[8][8];
-
     private Color color;
+    protected String picturePath;
 
-    private String picturePath;
-
-    public Figure(int x, int y, Color color) {
-        moveTo(x, y);
-        setColor(color);
-        setBounds(getPositionOnBoardX(),getPositionOnBoardY(), getWidth(), getHeight());
-        setOpaque(false);
+    public Figure() {
     }
+
+    public abstract void setSettings();
 
     public void setColor(Color color){
         this.color = color;
@@ -35,34 +35,6 @@ public abstract class Figure extends JPanel implements IFigure {
             setBorder(BorderFactory.createLineBorder(Color.WHITE,4));
         else
             setBorder(BorderFactory.createLineBorder(Color.BLACK,4));
-    }
-
-    public int getPositionOnBoardX() {
-        return positionOnBoardX;
-    }
-
-    public int getPositionOnBoardY() {
-        return positionOnBoardY;
-    }
-
-    public int getPositionInArrayX() {
-        return positionInArrayX;
-    }
-
-    public int getPositionInArrayY() {
-        return positionInArrayY;
-    }
-
-    public boolean isFirstStep(){
-        return firstStep;
-    }
-
-    public void setFirstStep(boolean firstStep){
-        this.firstStep = firstStep;
-    }
-
-    public Color getColor(){
-        return color;
     }
 
     public boolean[][] getSteps(){
@@ -79,13 +51,18 @@ public abstract class Figure extends JPanel implements IFigure {
         return 100;
     }
 
-
     @Override
-    public void moveTo(int x, int y) {
-        this.positionInArrayX = x;
-        this.positionInArrayY = y;
-        this.positionOnBoardX = x * 100;
-        this.positionOnBoardY = y * 100;
+    public void move() {
+        this.positionOnBoardX = this.positionInArrayX * 100;
+        this.positionOnBoardY = this.positionInArrayY * 100;
+    }
+
+    public void setBounds() {
+        this.setBounds(getPositionOnBoardX(), getPositionOnBoardY(), getWidth(), getHeight());
+    }
+
+    public void setOpaque() {
+        this.setOpaque(false);
     }
 
     public void showFigureMoves() {
@@ -107,5 +84,21 @@ public abstract class Figure extends JPanel implements IFigure {
                 panel.setNativeColor();
             }
         }
+    }
+
+    protected void clearPredictions() {
+        for (int i = 0; i < steps.length; i++) {
+            for (int k = 0; k < steps.length; k++) {
+                steps[i][k] = false;
+            }
+        }
+    }
+
+    protected boolean checkForAllyFigure(int x, int y) {
+        return ChessBoardLogic.figuresArray[y][x] != null && ChessBoardLogic.figuresArray[y][x].getColor().equals(this.getColor()) && ChessBoardLogic.figuresArray[y][x] != this;
+    }
+
+    protected boolean checkForEnemyFigure(int x, int y) {
+        return ChessBoardLogic.figuresArray[y][x] != null && !ChessBoardLogic.figuresArray[y][x].getColor().equals(this.getColor());
     }
 }

@@ -1,6 +1,5 @@
 package com.chess.сore.figures.white;
 
-import com.chess.сore.сhessboard.ChessBoardLogic;
 import com.chess.сore.figures.abstrac.Rook;
 
 import javax.imageio.ImageIO;
@@ -11,18 +10,7 @@ import java.io.IOException;
 
 public class WhiteRook extends Rook {
 
-    public WhiteRook(int x, int y, Color color) {
-        super(x, y, color);
-
-        JLabel label = new JLabel();
-
-        try {
-            label.setIcon(new ImageIcon(ImageIO.read(new File("src//main//resources//Chess pieces//Chess_rlt60.png"))));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        add(label);
+    public WhiteRook() {
     }
 
     @Override
@@ -32,12 +20,7 @@ public class WhiteRook extends Rook {
         boolean metAnAllyFigure = false;
         boolean metAnEnemyFigure = false;
 
-        //Очистка массива с предиктами ходов
-        for (int i = 0; i < steps.length; i++) {
-            for (int k = 0; k < steps.length; k++) {
-                steps[i][k] = false;
-            }
-        }
+        clearPredictions();
 
         //Предикт ходов по вертикали вверх от позиции фигуры
         for (int i = y; i >= 0; i--) {
@@ -118,11 +101,15 @@ public class WhiteRook extends Rook {
         }
     }
 
-    private boolean checkForAllyFigure(int x, int y) {
-        return ChessBoardLogic.figuresArray[y][x] != null && ChessBoardLogic.figuresArray[y][x].getColor().equals(this.getColor()) && ChessBoardLogic.figuresArray[y][x] != this;
-    }
-
-    private boolean checkForEnemyFigure(int x, int y) {
-        return ChessBoardLogic.figuresArray[y][x] != null && !ChessBoardLogic.figuresArray[y][x].getColor().equals(this.getColor());
+    @Override
+    public void setSettings() {
+        JLabel label = new JLabel();
+        try {
+            label.setIcon(new ImageIcon(ImageIO.read(new File(picturePath))));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        add(label);
+        predictSteps();
     }
 }
